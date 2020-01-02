@@ -22,11 +22,11 @@ app.use(morgan('dev')); // разработка
 
 app.use('/uploads', express.static('uploads'));
 
-app.use('/analytics', analyticsRouter);
-app.use('/auth', authRouter);
-app.use('/category', categoryRouter);
-app.use('/position', positionRouter);
-app.use('/order', orderRouter);
+app.use('/api/analytics', analyticsRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/category', categoryRouter);
+app.use('/api/position', positionRouter);
+app.use('/api/order', orderRouter);
 
 mongoose
     .connect(URI, {useNewUrlParser: true, useUnifiedTopology: true})
