@@ -10,14 +10,14 @@ const User = mongoose.model('users');
 const renderStrategy = passport => {
     const options = {
         jwtFromRequest: jwtExtract.fromAuthHeaderAsBearerToken(), // Будем брать токен, который находится в header
-        secretOrKeyProvider: jwt
+        secretOrKey: jwt
     };
 
     return passport.use(
-        new JwtStrategy(options, async (payload, done) => {
-            console.log(payload);
+         new JwtStrategy(options, async (payload, done) => {
+             console.log(payload)
             try {
-                const user = await User.findById(payload.userId).select('email id'); // userId берется из токена, который мы получаем при авторизации
+                const user = await User.findById(payload.userId).select('email id') // userId берется из токена, который мы получаем при авторизации
 
                 if (!user) return done(null, false);
 

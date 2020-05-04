@@ -13,21 +13,6 @@ const positionRouter = require('./routes/position');
 const renderStrategy = require('./middleware/renderStrategy');
 const {URI} = require('./config/keys');
 
-// защита от корявых url
-app.use(bodyParser.urlencoded({extended: true})); // позволяет энкодировать некоторые url которые приходят
-app.use(bodyParser.json()); // позволит генерировать json объекты
-
-app.use(cors());
-app.use(morgan('dev')); // разработка
-
-app.use('/uploads', express.static('uploads'));
-
-app.use('/api/analytics', analyticsRouter);
-app.use('/api/auth', authRouter);
-app.use('/api/category', categoryRouter);
-app.use('/api/position', positionRouter);
-app.use('/api/order', orderRouter);
-
 mongoose
     .connect(URI, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => console.log('Connect!'))
@@ -35,6 +20,21 @@ mongoose
 
 app.use(passport.initialize());
 renderStrategy(passport);
+
+app.use(morgan('dev')); // разработка
+app.use('/uploads', express.static('uploads'));
+
+// защита от корявых url
+app.use(bodyParser.urlencoded({extended: true})); // позволяет энкодировать некоторые url которые приходят
+app.use(bodyParser.json()); // позволит генерировать json объекты
+
+app.use(cors());
+
+app.use('/api/auth', authRouter);
+app.use('/api/analytics', analyticsRouter);
+app.use('/api/category', categoryRouter);
+app.use('/api/position', positionRouter);
+app.use('/api/order', orderRouter);
 
 module.exports = {
     app

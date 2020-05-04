@@ -1,14 +1,15 @@
 // @flow
+import {Link} from 'react-router-dom';
 import React from 'react';
 
 function Header () {
     return (
         <nav>
             <div className="nav-wrapper grey darken-1">
-                <a href="#" className="brand-logo">Newborn</a>
+                <Link to='/login' className="brand-logo">Newborn</Link>
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
-                    <li><a>Вход</a></li>
-                    <li><a>Регистрация</a></li>
+                    <li><Link to='/login' >Вход</Link></li>
+                    <li><Link to='/register' >Регистрация</Link></li>
                 </ul>
             </div>
         </nav>

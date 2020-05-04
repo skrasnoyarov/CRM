@@ -3,7 +3,7 @@ const showError = require('../utils/errorsHeandler');
 
 const createNewOrder = async (request, response) => {
   try {
-    const lastOrder = await Order.find({user: request.user.id}).sort({date: -1}) // date: -1 перевернет список с заказами, и последний станет первым
+    const lastOrder = await Order.find({user: request.user.id}).sort({date: -1});  // date: -1 перевернет список с заказами, и последний станет первым
     const lastOrderIndex = lastOrder ? lastOrder.order + 1 : 1;
 
     const order = await new Order({

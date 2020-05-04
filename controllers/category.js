@@ -4,7 +4,7 @@ const showError = require('../utils/errorsHeandler');
 
 const changeCategoryById = async (request, response) => {
     const categoryUpdated = {};
-
+    console.log(request, 'request')
     try {
         categoryUpdated.name = request.body.name;
         categoryUpdated.imageSrc = request.file ? request.file.path : '';    
@@ -22,9 +22,10 @@ const changeCategoryById = async (request, response) => {
 };
 
 const createNewCategory = async (request, response) => {
+    console.log(request.body)
     try {
         const category = await new Category({
-            imageSrc: request.file.path || '',
+            imageSrc: request.file ? request.file.path : '',
             name: request.body.name,
             user: request.user.id
         }).save();
